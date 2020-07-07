@@ -93,12 +93,8 @@ t = datetime.datetime.now()
 
 print("[*] Commencing spam with \"" + word + "\"\n\n")
 
-session = requests.Session()
-
 def createSession(session):
     #create session
-    print("[*] Faking survey visit...")
-
     #extract survey_data
     try:
         page = session.get("https://www.surveymonkey.com/r/7JZRVLJ?embedded=1")
@@ -106,7 +102,6 @@ def createSession(session):
         print("[!] Can't connect to host. Do you have an existing internet connection?")
         exit()
 
-    print("[*] Extracting \"survey_data\" parameter...")
     survey_data_offset = page.text.find("survey_data\" value=\"") + 20
 
     if survey_data_offset == 19:
@@ -131,8 +126,6 @@ def createSession(session):
         if page.text[i] == "\"":
             break
         survey_data += page.text[i]
-
-    print("[*] Debug info: Status code: " + str(page.status_code) + ", \"survey_data\" parameter length: " + str(len(survey_data)))
 
     #    wait = randint(0,5000) / 1000
     #    print("[*] Waiting " + str(wait) + "s...")
@@ -172,9 +165,9 @@ headers_2 = {
 
 fail = False
 
-post_data = createSession(session)
-
-while True:    
+while True:
+    session = requests.Session()
+    post_data = createSession(session)
 
     try:
         response = session.post("https://www.surveymonkey.com/r/7JZRVLJ?embedded=1", headers=headers_2, files=post_data)

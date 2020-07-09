@@ -117,7 +117,6 @@ def createSession(session):
             f.write(str(page.headers) + "\n\n")
             f.write('\n\nresponse content:\n\n\n')
             f.write(str(page.content.decode()))
-        exit()
 
     #python probably has a built in thing but i dont give a shit
     survey_data = ""
@@ -173,7 +172,6 @@ while True:
         response = session.post("https://www.surveymonkey.com/r/7JZRVLJ?embedded=1", headers=headers_2, files=post_data)
     except requests.RequestException:
         print("[!] Can't connect to host. Do you have an existing internet connection?")
-        exit()
 
     if response.status_code != 200:
         if not fail:
@@ -196,7 +194,6 @@ while True:
                 f.write(str(response.headers)+"\n\n")
                 f.write('\n\nresponse content:\n\n\n')
                 f.write(str(response.content.decode()))
-            exit()
     else:
         with open("count.json", 'r') as f:
             count = json.load(f)

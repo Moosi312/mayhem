@@ -206,7 +206,7 @@ while True:
         with open("count.json", 'w') as f:
             json.dump(count, f)
 
-        print("[*] Sumbitted survey " + str(num) + " times; " + str(datetime.datetime.now() - t))
+        print("[*] Sumbitted survey " + str(num) + " times with " + word + "; " + str(datetime.datetime.now() - t))
         t = datetime.datetime.now()
             
         fail = False

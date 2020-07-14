@@ -87,11 +87,12 @@ print("")
 
 word = get_word()
 
-count = 0
-
-t = datetime.datetime.now()
-
-print("[*] Commencing spam with \"" + word + "\"\n\n")
+with open("count.json", 'r') as f:
+    count = json.load(f)
+if count[word] is None:
+    count[word] = 0
+    with open("count.json", 'w') as f:
+        json.dump(count, f)
 
 def createSession(session):
     #create session
@@ -163,6 +164,10 @@ headers_2 = {
 
 fail = False
 
+print("[*] Commencing spam with \"" + word + "\"\n\n")
+
+t = datetime.datetime.now()
+
 while True:
     session = requests.Session()
     post_data = createSession(session)
@@ -196,8 +201,8 @@ while True:
     else:
         with open("count.json", 'r') as f:
             count = json.load(f)
-        count["count"] += 1
-        num = count["count"]
+        count[word] += 1
+        num = count[word]
         with open("count.json", 'w') as f:
             json.dump(count, f)
 

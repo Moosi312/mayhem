@@ -89,7 +89,7 @@ word = get_word()
 
 with open("count.json", 'r') as f:
     count = json.load(f)
-if count[word] is None:
+if word not in count:
     count[word] = 0
     with open("count.json", 'w') as f:
         json.dump(count, f)

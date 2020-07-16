@@ -101,6 +101,7 @@ def createSession(session):
         page = session.get("https://www.surveymonkey.com/r/7JZRVLJ?embedded=1")
     except requests.RequestException:
         print("[!] Can't connect to host. Do you have an existing internet connection?")
+        return {}
 
     survey_data_offset = page.text.find("survey_data\" value=\"") + 20
 

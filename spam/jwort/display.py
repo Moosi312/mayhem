@@ -5,3 +5,5 @@ with open("count.json", 'r') as f:
 
 for word in count:
     print("\"" + word + "\" has been posted " + count[word] + " times."
+
+print()
